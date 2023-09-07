@@ -1,6 +1,15 @@
+# from flask import Flask
+# from flask_sqlalchemy import SQLAlchemy
+
+# app = Flask(__name__) 
+
+# app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://kunal/kb@526688@localhost:5432/project'
+# db = SQLAlchemy(app)
+# app.
+
 from kafka import KafkaConsumer
-import json
-topic = 'mytopic'
+
+topic = 'employee'
 
 # Create a KafkaConsumer instance
 consumer = KafkaConsumer(
