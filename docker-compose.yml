@@ -27,7 +27,7 @@ services:
     container_name: my-postgres
     environment:
       POSTGRES_USER: kunal
-      POSTGRES_PASSWORD: kb@526688
+      POSTGRES_PASSWORD: kbpassword
       POSTGRES_DB: mydatabase
     ports:
       - "5432:5432"
