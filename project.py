@@ -15,9 +15,10 @@ consumer = KafkaConsumer(
 )
 consumer.subscribe(topics=topic)
 
+print("Server_Started")
+
 for message in consumer:
     print(f"Received message: {message.value}")
- 
     res = message.value
     ress = json.loads(res)
     try:

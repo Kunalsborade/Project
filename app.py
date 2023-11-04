@@ -1,6 +1,5 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
-from process.response.producer import produce_responce
 
 app = Flask(__name__)
 
@@ -28,23 +27,3 @@ class Employee(db.Model):
     def __repr__(self):
         return f'<Employee {self.first_name} {self.last_name}>'
     
-def create(data):
-    insert_employee = Employee(
-        first_name = data["firstname"], 
-        last_name = data["lastname"],
-        email = data["email"],
-        number = data["number"] 
-    )
-    db.session.add(insert_employee)
-    db.session.commit()
-    employee = get_employee_id(data["firstname"])
-    produce_responce(employee)
-
-    
-def get_employee_id(firstname):
-    employee = Employee.query.filter_by(first_name=firstname).first()
-    print(employee)
-    if employee:
-        return employee.id
-    else:
-        return None
