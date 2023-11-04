@@ -1,30 +1,33 @@
-from process.controller.action import create, get, update, delete
-
+from process.controller.action import create_employee, get_employee, update_employee, delete_employee
 import json
+import logging
 
-def take_action(message):
+# Configure logging
+logger = logging.getLogger('MessageProcessor')
+logger.setLevel(logging.INFO)
+console_handler = logging.StreamHandler()
+formatter = logging.Formatter('%(levelname)s - %(message)s')
+console_handler.setFormatter(formatter)
+logger.addHandler(console_handler)
+
+def process_message(message):
     try:
-        print("In Take Action")
+        logger.info("IN Processing message Function")
         message_dict = json.loads(message)
         action = message_dict['action']
-        data = message_dict['data']
-        id = message_dict.get("id")
+        data = message_dict.get('data')
+        id = message_dict.get('id')
 
-        if action == "Post":
-            create(data)
+        if action == 'Post':
+            create_employee(data)
+        elif action == 'Get':
+            get_employee(id)
+        elif action == 'Put':
+            update_employee(data, id)
+        elif action == 'Delete':
+            delete_employee(id)
+        else:
+            logger.error(f"Unknown action: {action}")
 
-        if action == "Get":
-            get(id)
-
-        if action == "Put":
-            update(data,id)
-
-        if action == "Delete":
-            delete(id)
-
-    except json.JSONDecodeError as e:
-        print(f"Error decoding message: {e}")
-    except KeyError as e:
-        print(f"Missing key in message: {e}")
-
-
+    except Exception as e:
+        logger.error(f"Error processing message: {e}")
