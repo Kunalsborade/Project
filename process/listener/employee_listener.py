@@ -1,4 +1,4 @@
-from process.controller.action import create_employee, get_employee, update_employee, delete_employee
+from process.controller.action import create_employee, get_employee, update_employee, delete_employee, get_all_employee
 import json
 import logging
 
@@ -26,6 +26,8 @@ def process_message(message):
             update_employee(data, id)
         elif action == 'Delete':
             delete_employee(id)
+        elif action == 'Get_all':
+            get_all_employee()
         else:
             logger.error(f"Unknown action: {action}")
 

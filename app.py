@@ -12,7 +12,7 @@ topic = 'employee'
 
 class Employee(db.Model):
     __tablename__ = 'Employee'
-    id = db.Column('id', db.Integer, primary_key=True)
+    id = db.Column('id', db.Integer, primary_key=True, autoincrement=True)
     first_name = db.Column('firstname',db.String(50))
     last_name = db.Column('lastname', db.String(50))
     email = db.Column('email', db.String(120), unique=True)
